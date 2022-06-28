@@ -13,9 +13,11 @@ const userSchema = new Schema({
 userSchema.pre("save", function (next) {
   const user = this
 
+  // generate a salt then run callback
   bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err)
 
+    // hash our password using the salt
     bcrypt.hash(user.password, salt, null, function (err, hash) {
       if (err) return next(err)
 

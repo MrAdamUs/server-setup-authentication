@@ -10,13 +10,13 @@ const userSchema = new Schema({
 
 // On Save Hook, encrypt password
 
-userSchema.pre("save", (next) => {
+userSchema.pre("save", function (next) {
   const user = this
 
-  bcrypt.getSalt(10, (err, salt) => {
+  bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err)
 
-    bcrypt.hash(user.password, salt, null, (err, hash) => {
+    bcrypt.hash(user.password, salt, null, function (err, hash) {
       if (err) return next(err)
 
       user.password = hash

@@ -17,8 +17,9 @@ const localLogin = new LocalStrategy(localOptions, function (
   // otherwise, call done with false
   User.findOne({ email: email }, function (err, user) {
     if (err) return done(err)
-
     if (!user) return done(null, false)
+
+    // compare password - is `password` equal to user.password
   })
 })
 // Setup options for JWT Strategy
